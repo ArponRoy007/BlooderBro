@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= title || "BlooderBro" %></title>
+  <title>
+    <%= locals.title || "BlooderBro" %>
+  </title>
+
+  <meta name="description"
+    content="BlooderBro is a real-time blood donation platform connecting patients in critical need with verified local donors instantly.">
+
+  <meta name="keywords"
+    content="blood donation, donate blood, local blood donors, emergency blood, BlooderBro, find blood donors, save lives, blood group">
+
+  <meta itemprop="image" content="/images/logo2.png">
+
+  <meta property="og:title" content="BlooderBro - Save Lives Locally">
+  <meta property="og:description" content="Join our mission to save lives. Find donors or request blood instantly.">
+  <meta property="og:image" content="/images/logo2.png">
   <link rel="icon" href="/images/logo2.png" type="image/png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
   <% if (css) { %>
     <link rel="stylesheet" href="/css/<%= css %>">
-  <% } %>
+    <% } %>
 </head>
+
 <body>
