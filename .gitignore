@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# Environment variables (CRITICAL TO KEEP SECRET!)
+.env
+
+# Testing coverage folders (created by nyc/mocha)
+coverage/
+.nyc_output/
+
+# macOS system files (Since you are on a Mac!)
+.DS_Store
+
+# npm debug logs
+npm-debug.log*

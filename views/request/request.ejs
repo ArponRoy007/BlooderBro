@@ -1,0 +1,133 @@
+<%- include("../partials/header", { title: "Request Blood" , css: "request.css" }) %>
+
+  <nav>
+    <div class="nav-left">
+      <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+        <img src="/images/logo2.png" alt="Logo" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;"
+          onerror="this.style.display='none'" />
+        <div class="nav-title" style="margin: 0; font-weight: bold; font-size: 1.5rem; color: #fdfdfd;">BlooderBro</div>
+      </a>
+    </div>
+
+    <button class="hamburger" onclick="document.getElementById('nav-links').classList.toggle('active')">☰</button>
+
+    <div class="nav-right" id="nav-links">
+      <% if (typeof currentUser !=='undefined' && currentUser) { %>
+        <a href="/"><button class="btn">Home</button></a>
+        <a href="/profile"><button class="btn">Profile</button></a>
+        <a href="/logout"><button class="btn">Logout</button></a>
+        <% } else { %>
+          <a href="/login"><button class="btn">Login</button></a>
+          <a href="/register"><button class="btn">Sign Up</button></a>
+          <% } %>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container" style="margin: 0 auto;">
+      <h1 class="page-title">Request Blood in Just a Few Steps</h1>
+
+      <p class="emergency-note">For immediate emergencies, please also call our emergency hotline at
+        <strong>1800-BLOOD-HELP</strong>
+      </p>
+
+      <div class="form-card" style="margin: 0 auto;">
+        <h2 class="form-title">Blood Request Form</h2>
+
+        <form method="POST" action="/request">
+
+          <div class="form-group">
+            <label for="fullName" class="required">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter patient or requestor name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required>
+            <div class="helper-text">We'll contact you at this number</div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="required">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+          </div>
+
+          <div class="form-group">
+            <label for="bloodGroup" class="required">Required Blood Group</label>
+            <select id="bloodGroup" name="bloodGroup" required>
+              <option value="" disabled selected>Select blood group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="urgencyLevel" class="required">Urgency Level</label>
+            <select id="urgencyLevel" name="urgencyLevel">
+              <option value="" disabled selected>Select urgency level</option>
+              <option value="emergency">Emergency</option>
+              <option value="24hours">Within 24 hours</option>
+              <option value="routine">Routine</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="hospitalName" class="required">Hospital Name</label>
+            <input type="text" id="hospitalName" name="hospitalName" placeholder="Enter hospital name">
+          </div>
+
+          <div class="form-group">
+            <label for="hospitalAddress" class="required">Hospital Address</label>
+            <textarea id="hospitalAddress" name="hospitalAddress" placeholder="Enter complete hospital address"
+              style="min-height: 80px;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="pincode" class="required">Pincode/ZIP Code</label>
+            <input type="number" id="pincode" name="pincode" placeholder="Enter hospital pincode or ZIP code" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Additional Message</label>
+            <textarea id="message" name="message"
+              placeholder="Enter any additional details or special requirements (optional)"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Request Blood Now</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- <footer class="footer">
+    <div class="container footer-container">
+      <ul class="footer-links">
+        <li class="footer-link"><a href="#">About</a></li>
+        <li class="footer-link"><a href="#">Contact</a></li>
+        <li class="footer-link"><a href="#">Privacy</a></li>
+        <li class="footer-link"><a href="#">Terms</a></li>
+      </ul>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/BlooderBroOfficial" target="_blank" class="social-icon">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        
+        <a href="https://www.instagram.com/blooderbro.official/" target="_blank" class="social-icon">
+          <i class="fab fa-instagram"></i>
+        </a>
+        
+        <a href="mailto:blooderbroofficial@gmail.com" class="social-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <p class="copyright text-center">© 2025 BlooderBro. All rights reserved.</p>
+    </div>
+  </footer> -->
+
+  <%- include("../partials/footer") %>

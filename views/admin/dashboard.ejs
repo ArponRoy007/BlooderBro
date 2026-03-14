@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlooderBro - Investor Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        /* ✅ SCROLLING ENABLED */
+        body { 
+            background-color: #0f172a; /* Deep SaaS Dark Blue */
+            color: #f8fafc; 
+            min-height: 100vh; /* Changed from height to min-height */
+            width: 100vw;
+            overflow-x: hidden; 
+            display: flex;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: #1e293b;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+            position: sticky; /* Keeps sidebar in view while scrolling */
+            top: 0;
+            height: 100vh;
+        }
+        .brand { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
+        .brand img { width: 45px; border-radius: 50%; box-shadow: 0 0 10px #e63946; }
+        .brand h2 { font-size: 1.4rem; color: #e63946; }
+        .nav-item { padding: 15px; margin-bottom: 10px; border-radius: 8px; background: rgba(230,57,70,0.1); color: #e63946; font-weight: bold; cursor: pointer; border-left: 4px solid #e63946; }
+        .logout { margin-top: auto; color: #94a3b8; text-decoration: none; padding: 15px; display: block; text-align: center; border: 1px solid #334155; border-radius: 8px; transition: 0.3s; }
+        .logout:hover { background: #e63946; color: white; border-color: #e63946; }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .header h1 { font-size: 2rem; font-weight: 300; }
+        .header h1 strong { font-weight: 700; color: #e63946; }
+        .live-badge { background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 6px 18px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; display: flex; align-items: center; gap: 8px; border: 1px solid #22c55e; }
+        .dot { height: 10px; width: 10px; background-color: #22c55e; border-radius: 50%; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+
+        /* METRICS ROW (3 Cards) */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .metric-card {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .metric-card:hover { transform: translateY(-5px); }
+        .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #e63946; }
+        .metric-info h3 { font-size: 0.95rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .metric-info h2 { font-size: 2.8rem; color: white; font-weight: 700; }
+        .metric-icon { font-size: 3.5rem; color: rgba(230,57,70,0.15); }
+
+        /* CHARTS GRID */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+        .full-width { grid-column: 1 / -1; }
+        
+        .chart-card {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .chart-card h3 { font-size: 1.2rem; color: #f8fafc; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .chart-card h3 i { color: #e63946; }
+        .chart-container { position: relative; width: 100%; height: 300px; }
+
+        /* Top Regions List */
+        .region-list { list-style: none; margin-top: 15px; }
+        .region-list li { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #334155; color: #cbd5e1; font-size: 1.1rem; }
+        .region-list li:last-child { border: none; }
+        .region-count { background: #e63946; color: white; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="brand">
+            <img src="/images/logo2.png" alt="Logo">
+            <h2>BlooderBro</h2>
+        </div>
+        <div class="nav-item"><i class="fas fa-rocket"></i> Investor Overview</div>
+        <a href="/admin/logout" class="logout"><i class="fas fa-lock"></i> Secure Logout</a>
+    </div>
+
+    <div class="main-content">
+        
+        <div class="header">
+            <h1>Platform <strong>Intelligence & Growth</strong></h1>
+            <div class="live-badge"><div class="dot"></div> System Status: Scaling</div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-info">
+                    <h3>Total Registered Heroes</h3>
+                    <h2><%= totalUsers %></h2>
+                </div>
+                <i class="fas fa-users metric-icon"></i>
+            </div>
+            <div class="metric-card" style="background: linear-gradient(135deg, #1e293b, #2d1418); border-color: #e63946;">
+                <div class="metric-info">
+                    <h3 style="color: #fda4af;">Total Lives Saved</h3>
+                    <h2 style="color: #e63946;"><%= totalDonations %></h2>
+                </div>
+                <i class="fas fa-heartbeat metric-icon" style="color: #e63946; opacity: 0.8;"></i>
+            </div>
+            <div class="metric-card">
+                <div class="metric-info">
+                    <h3>Emergency Requests</h3>
+                    <h2><%= totalRequests %></h2>
+                </div>
+                <i class="fas fa-ambulance metric-icon"></i>
+            </div>
+        </div>
+
+        <div class="chart-card full-width">
+            <h3><i class="fas fa-chart-line"></i> User Acquisition Growth (Month-over-Month)</h3>
+            <div class="chart-container" style="height: 350px;">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3><i class="fas fa-wave-square"></i> Emergency Request Volume (Last 7 Days)</h3>
+                <div class="chart-container">
+                    <canvas id="dailyRequestsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3><i class="fas fa-map-marked-alt"></i> Highest Demand Regions</h3>
+                <ul class="region-list">
+                    <% if (topRegions.length > 0) { %>
+                        <% topRegions.forEach((region) => { %>
+                            <li>
+                                <span><i class="fas fa-map-marker-alt" style="color:#e63946; margin-right:8px;"></i> <%= region._id || "Unspecified" %></span>
+                                <span class="region-count"><%= region.count %> Donors</span>
+                            </li>
+                        <% }) %>
+                    <% } else { %>
+                        <li style="color: #64748b;">Awaiting regional data...</li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Set Chart defaults for Dark Mode
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = "'Poppins', sans-serif";
+
+        // Pull actual database arrays passed from server.js
+        const dynamicGrowthLabels = <%- last6MonthsLabels %>;
+        const dynamicGrowthData = <%- cumulativeUserData %>;
+
+        const dynamicDailyLabels = <%- last7DaysLabels %>;
+        const dynamicDailyData = <%- last7DaysData %>;
+
+        // ==========================================
+        // 1. ACTUAL USER GROWTH CHART 
+        // ==========================================
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        let gradientGrowth = ctxGrowth.createLinearGradient(0, 0, 0, 400);
+        gradientGrowth.addColorStop(0, 'rgba(230, 57, 70, 0.5)'); 
+        gradientGrowth.addColorStop(1, 'rgba(230, 57, 70, 0.0)'); 
+
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: dynamicGrowthLabels,
+                datasets: [{
+                    label: 'Total Registered Users',
+                    data: dynamicGrowthData,
+                    borderColor: '#e63946',
+                    backgroundColor: gradientGrowth,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#e63946',
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }, 
+                scales: {
+                    y: { grid: { color: '#334155', borderDash: [5, 5] }, beginAtZero: true },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // ==========================================
+        // 2. ACTUAL DAILY REQUESTS CHART 
+        // ==========================================
+        const ctxDaily = document.getElementById('dailyRequestsChart').getContext('2d');
+        
+        new Chart(ctxDaily, {
+            type: 'bar',
+            data: {
+                labels: dynamicDailyLabels,
+                datasets: [{
+                    label: 'Emergency Blood Requests',
+                    data: dynamicDailyData, 
+                    backgroundColor: '#3b82f6', 
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { 
+                        grid: { color: '#334155' }, 
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 } // Ensures we don't get decimal numbers like 0.5 requests
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

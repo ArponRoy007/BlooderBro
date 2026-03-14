@@ -1,0 +1,52 @@
+<%- include("../partials/header", { title: "BlooderBro - Login" , css: "login.css" }) %>
+
+    <div class="login-container">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <img src="/images/logo2.png" width="90" height="90">
+            </div>
+            <div class="logo">BlooderBro</div>
+        </div>
+
+        <h1 class="welcome-text">Welcome Back to BlooderBro</h1>
+
+        <form class="login-form" method="POST" action="/login">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required />
+            </div>
+
+            <div style="text-align: right; margin-top: -10px; margin-bottom: 20px;">
+                <a href="javascript:void(0)" onclick="openInfoModal('forgotModal')" style="color: #e63946; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-button">Login</button>
+        </form>
+
+        <div class="signup-link">
+            Don’t have an account? <a href="/register">Sign Up</a>
+        </div>
+    </div>
+
+    <div id="forgotModal" class="info-modal">
+        <div class="info-modal-content policy-style" style="max-width: 400px; text-align: center;">
+            <span class="close-info-btn" onclick="closeInfoModal('forgotModal')">&times;</span>
+            <h2 style="border: none; margin-top: 0;">Reset Password</h2>
+            <p style="color: #666; margin-bottom: 20px;">Enter your registered email and a new password.</p>
+            
+            <form method="POST" action="/forgot-password" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="email" name="email" placeholder="Registered Email" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                <input type="password" name="newPassword" placeholder="New Password" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                <input type="password" name="confirmPassword" placeholder="Confirm New Password" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                
+                <button type="submit" style="background: #e63946; color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-top: 10px;">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+<%- include("../partials/footer") %>

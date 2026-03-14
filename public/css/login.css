@@ -1,0 +1,121 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* CRITICAL: Stacks Header, Form, and Footer vertically */
+}
+
+/* Container styles */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  margin: auto; /* CRITICAL: Centers the form and pushes the footer down */
+}
+
+/* ... Keep the rest of your login.css exactly the same ... */
+  
+  /* Logo and header styles */
+  .logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e63946;
+    margin-bottom: 10px;
+  }
+  
+  .logo-icon {
+    margin-bottom: 5px;
+  }
+  
+  .welcome-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  /* Form styles */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .form-group input {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    height: 50px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #e63946;
+    box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.1);
+  }
+  
+  .login-button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background-color: #c1272d;
+  }
+  
+  .signup-link {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+  }
+  
+  .signup-link a {
+    color: #e63946;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
+  
