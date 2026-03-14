@@ -141,7 +141,7 @@ BlooderBro/
 >
 > I'm actively seeking **full-time positions or internship opportunities** in Full-Stack or Backend Development. BlooderBro is a testament to my ability to independently architect, build, and ship a production-grade web application — complete with MVC design, real-time features, security systems, and automated testing.
 >
-> If your team values clean code, ownership, and developers who ship — I'd love to connect. Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/arpon-roy-60784a301) or [Email](mailto:blooderbroofficial@gmail.com).
+> If your team values clean code, ownership, and developers who ship — I'd love to connect. Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/arpon-roy-60784a301) or [Email](mailto:royarpon007@gmail.com).
 
 ---
 
