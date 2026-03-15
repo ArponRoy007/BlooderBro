@@ -40,8 +40,8 @@ exports.postRequest = async (req, res) => {
       const donorEmails = donors.map(d => d.email);
 
       const mailOptions = {
-        from: `"BlooderBro Alerts" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER, 
+        from: `"BlooderBro Alerts" <blooderbroofficial@gmail.com>`,
+        to: "blooderbroofficial@gmail.com", 
         bcc: donorEmails, 
         subject: `🚨 URGENT: ${bloodGroup} Blood Needed at ${hospitalName || "a nearby hospital"}!`,
         html: `
