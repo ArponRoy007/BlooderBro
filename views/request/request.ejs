@@ -42,9 +42,25 @@
           </div>
 
           <div class="form-group">
-            <label for="phone" class="required">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required>
-            <div class="helper-text">We'll contact you at this number</div>
+            <label class="required">WhatsApp Number</label>
+            <div style="display: flex; gap: 10px; margin-bottom: 5px;">
+              <select name="countryCode" required style="width: 40%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; background-color: white;">
+                <option value="91">🇮🇳 India (+91)</option>
+                <option value="880">🇧🇩 Bangladesh (+880)</option>
+                <option value="977">🇳🇵 Nepal (+977)</option>
+                <option value="1">🇺🇸 USA (+1)</option>
+                <option value="1">🇨🇦 Canada (+1)</option>
+                <option value="61">🇦🇺 Australia (+61)</option>
+              </select>
+              <input type="tel" id="phone" name="phone" placeholder="Enter number without code" required style="width: 60%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
+            <div class="helper-text">Donors will contact you directly on WhatsApp to help.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="socialLink">Social Media Backup (Optional)</label>
+            <input type="url" id="socialLink" name="socialLink" placeholder="Facebook or Instagram Profile Link" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <div class="helper-text">In case WhatsApp is unreachable.</div>
           </div>
 
           <div class="form-group">
@@ -104,30 +120,5 @@
       </div>
     </div>
   </main>
-
-  <!-- <footer class="footer">
-    <div class="container footer-container">
-      <ul class="footer-links">
-        <li class="footer-link"><a href="#">About</a></li>
-        <li class="footer-link"><a href="#">Contact</a></li>
-        <li class="footer-link"><a href="#">Privacy</a></li>
-        <li class="footer-link"><a href="#">Terms</a></li>
-      </ul>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/BlooderBroOfficial" target="_blank" class="social-icon">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        
-        <a href="https://www.instagram.com/blooderbro.official/" target="_blank" class="social-icon">
-          <i class="fab fa-instagram"></i>
-        </a>
-        
-        <a href="mailto:blooderbroofficial@gmail.com" class="social-icon">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </div>
-      <p class="copyright text-center">© 2025 BlooderBro. All rights reserved.</p>
-    </div>
-  </footer> -->
 
   <%- include("../partials/footer") %>

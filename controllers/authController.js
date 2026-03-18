@@ -37,7 +37,21 @@ exports.postLogin = async (req, res) => {
 
 // Handle Register Submission
 exports.postRegister = async (req, res) => {
-  const { name, age, gender, address, pincode, bloodGroup, email, phone, facebookLink, password, confirmPassword } = req.body;
+  // 1. Grab all the new international fields
+  const {
+    name,
+    email,
+    password,
+    confirmPassword,
+    age,
+    gender,
+    bloodGroup,
+    address,
+    pincode,
+    countryCode,
+    phone,
+    socialLink,
+  } = req.body;
 
   if (password !== confirmPassword) {
     return res.redirect("/register");
@@ -45,8 +59,21 @@ exports.postRegister = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // 2. Save exactly what matches your updated User Model
     await User.create({
-      name, age, gender, address, pincode, bloodGroup, email, phone, facebookLink, password: hashedPassword, isAvailable: true,
+      name,
+      email,
+      password: hashedPassword,
+      age,
+      gender,
+      bloodGroup,
+      address,
+      pincode,
+      countryCode, // ✅ Correctly saving country code
+      phone,       // ✅ Correctly saving phone
+      socialLink,  // ✅ Correctly saving backup link
+      isAvailable: true,
     });
     res.redirect("/login");
   } catch (err) {
@@ -57,33 +84,27 @@ exports.postRegister = async (req, res) => {
 
 // Handle Password Reset Logic (Forgot Password)
 exports.postForgotPassword = async (req, res) => {
-    const { email, newPassword, confirmPassword } = req.body;
-  
-    // 1. Check if passwords match
-    if (newPassword !== confirmPassword) {
-        return res.redirect("/login");
+  const { email, newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    return res.redirect("/login");
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.redirect("/login");
     }
-  
-    try {
-        // 2. Find the user by their email
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.redirect("/login"); 
-        }
-  
-        // 3. Hash the NEW password and securely overwrite the old one in the database!
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        user.password = hashedPassword;
-        
-        // 4. Save the erased/updated password to MongoDB
-        await user.save(); 
-  
-        // 5. Send them back to the login page to try their new password
-        res.redirect("/login");
-    } catch (err) {
-        console.error("Password Reset Error:", err);
-        res.redirect("/login");
-    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+
+    await user.save();
+    res.redirect("/login");
+  } catch (err) {
+    console.error("Password Reset Error:", err);
+    res.redirect("/login");
+  }
 };
 
 // Handle Logout

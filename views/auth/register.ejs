@@ -63,15 +63,26 @@
                     <input type="email" name="email" class="form-control" required>
                 </div>
 
-                <div class="form-group">
-                    <label class="required">Phone</label>
-                    <input type="tel" name="phone" class="form-control" required>
+                <label>WhatsApp Number</label>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <select name="countryCode" required
+                        style="width: 40%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; background-color: white;">
+                        <option value="91">🇮🇳 India (+91)</option>
+                        <option value="880">🇧🇩 Bangladesh (+880)</option>
+                        <option value="977">🇳🇵 Nepal (+977)</option>
+                        <option value="1">🇺🇸 USA (+1)</option>
+                        <option value="1">🇨🇦 Canada (+1)</option>
+                        <option value="61">🇦🇺 Australia (+61)</option>
+                    </select>
+
+                    <input type="tel" name="phone" placeholder="Enter number without code" required
+                        style="width: 60%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
                 </div>
 
-                <div class="form-group">
-                    <label class="required">Facebook Profile Link</label>
-                    <input type="text" name="facebookLink" class="form-control" placeholder="e.g., https://www.facebook.com/username" required>
-                </div>
+                <label>Social Media Backup (Optional)</label>
+                <input type="url" name="socialLink" placeholder="Facebook or Instagram Profile Link"
+                    style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px;">
+
 
                 <div class="form-row">
                     <div class="form-col">
@@ -81,7 +92,8 @@
 
                     <div class="form-col">
                         <label class="required">Confirm Password</label>
-                        <input type="password" placeholder="Abc123" name="confirmPassword" class="form-control" required>
+                        <input type="password" placeholder="Abc123" name="confirmPassword" class="form-control"
+                            required>
                     </div>
                 </div>
 
@@ -94,4 +106,4 @@
         </div>
     </div>
 
-<%- include("../partials/footer") %>
+    <%- include("../partials/footer") %>

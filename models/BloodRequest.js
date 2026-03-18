@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const bloodRequestSchema = new mongoose.Schema({
   requesterId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   fullName: { type: String, required: true },
+  countryCode: { type: String, required: true },
   phone: { type: String, required: true },
+  socialLink: { type: String, required: false },
   email: { type: String, required: true },
   bloodGroup: { type: String, required: true },
   pincode: { type: String, required: true },

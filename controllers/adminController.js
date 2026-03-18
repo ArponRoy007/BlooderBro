@@ -7,7 +7,6 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res) => {
   const { email, password } = req.body;
-  // Hardcoded official credentials for investor pitches
   if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
       req.session.isAdmin = true;
       res.redirect("/admin/dashboard");
@@ -33,10 +32,8 @@ exports.getDashboard = async (req, res) => {
       ]);
 
       // ==========================================
-      // DYNAMIC CHART DATA LOGIC
-      // ==========================================
-      
       // 1. Daily Requests (Last 7 Days)
+      // ==========================================
       const last7DaysLabels = [];
       const last7DaysData = [0, 0, 0, 0, 0, 0, 0];
       const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -60,7 +57,9 @@ exports.getDashboard = async (req, res) => {
           }
       });
 
+      // ==========================================
       // 2. User Growth (Last 6 Months Cumulative)
+      // ==========================================
       const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const last6MonthsLabels = [];
       const newUsersPerMonth = [0, 0, 0, 0, 0, 0];
@@ -71,7 +70,7 @@ exports.getDashboard = async (req, res) => {
           last6MonthsLabels.push(monthNames[d.getMonth()]);
       }
 
-      const allUsers = await User.find({});
+      const allUsers = await User.find({}).sort({ createdAt: -1 }); // Added sort so newest users show at top of the list!
       let baseUsers = 0; 
 
       allUsers.forEach(user => {
@@ -94,6 +93,25 @@ exports.getDashboard = async (req, res) => {
           cumulativeUserData.push(currentSum);
       }
 
+      // ==========================================
+      // 3. Daily New Users (Last 7 Days)
+      // ==========================================
+      const last7DaysUserData = [0, 0, 0, 0, 0, 0, 0];
+      allUsers.forEach(user => {
+          const date = user.createdAt || user._id.getTimestamp();
+          const now = new Date();
+          const diffTime = now.getTime() - date.getTime();
+          const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+          
+          if(diffDays >= 0 && diffDays < 7) {
+              const index = 6 - diffDays;
+              last7DaysUserData[index]++;
+          }
+      });
+
+      // ==========================================
+      // FINALLY: Send ALL calculated data to the view
+      // ==========================================
       res.render("admin/dashboard", {
           totalUsers,
           totalRequests,
@@ -102,8 +120,11 @@ exports.getDashboard = async (req, res) => {
           last7DaysLabels: JSON.stringify(last7DaysLabels),
           last7DaysData: JSON.stringify(last7DaysData),
           last6MonthsLabels: JSON.stringify(last6MonthsLabels),
-          cumulativeUserData: JSON.stringify(cumulativeUserData)
+          cumulativeUserData: JSON.stringify(cumulativeUserData),
+          last7DaysUserData: JSON.stringify(last7DaysUserData), 
+          allUsers 
       });
+
   } catch (err) {
       console.error(err);
       res.send("Error loading dashboard data.");

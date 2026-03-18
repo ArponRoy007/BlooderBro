@@ -11,28 +11,10 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
-        /* ✅ SCROLLING ENABLED */
-        body { 
-            background-color: #0f172a; /* Deep SaaS Dark Blue */
-            color: #f8fafc; 
-            min-height: 100vh; /* Changed from height to min-height */
-            width: 100vw;
-            overflow-x: hidden; 
-            display: flex;
-        }
+        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; width: 100vw; overflow-x: hidden; display: flex; }
 
         /* SIDEBAR */
-        .sidebar {
-            width: 250px;
-            background: #1e293b;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid #334155;
-            position: sticky; /* Keeps sidebar in view while scrolling */
-            top: 0;
-            height: 100vh;
-        }
+        .sidebar { width: 250px; background: #1e293b; padding: 20px; display: flex; flex-direction: column; border-right: 1px solid #334155; position: sticky; top: 0; height: 100vh; }
         .brand { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
         .brand img { width: 45px; border-radius: 50%; box-shadow: 0 0 10px #e63946; }
         .brand h2 { font-size: 1.4rem; color: #e63946; }
@@ -41,71 +23,41 @@
         .logout:hover { background: #e63946; color: white; border-color: #e63946; }
 
         /* MAIN CONTENT AREA */
-        .main-content {
-            flex: 1;
-            padding: 30px 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-        
+        .main-content { flex: 1; padding: 30px 40px; display: flex; flex-direction: column; gap: 25px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .header h1 { font-size: 2rem; font-weight: 300; }
         .header h1 strong { font-weight: 700; color: #e63946; }
         .live-badge { background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 6px 18px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; display: flex; align-items: center; gap: 8px; border: 1px solid #22c55e; }
         .dot { height: 10px; width: 10px; background-color: #22c55e; border-radius: 50%; animation: pulse 1.5s infinite; }
-
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
 
-        /* METRICS ROW (3 Cards) */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-        .metric-card {
-            background: #1e293b;
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid #334155;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
+        /* METRICS & CHARTS */
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .metric-card { background: #1e293b; border-radius: 15px; padding: 25px; border: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; overflow: hidden; transition: transform 0.3s ease; }
         .metric-card:hover { transform: translateY(-5px); }
         .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #e63946; }
         .metric-info h3 { font-size: 0.95rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .metric-info h2 { font-size: 2.8rem; color: white; font-weight: 700; }
         .metric-icon { font-size: 3.5rem; color: rgba(230,57,70,0.15); }
-
-        /* CHARTS GRID */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-        }
-        .full-width { grid-column: 1 / -1; }
         
-        .chart-card {
-            background: #1e293b;
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid #334155;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+        .charts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; } /* Updated to 3 columns */
+        .full-width { grid-column: 1 / -1; }
+        .chart-card { background: #1e293b; border-radius: 15px; padding: 25px; border: 1px solid #334155; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .chart-card h3 { font-size: 1.2rem; color: #f8fafc; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
         .chart-card h3 i { color: #e63946; }
-        .chart-container { position: relative; width: 100%; height: 300px; }
+        .chart-container { position: relative; width: 100%; height: 250px; }
 
-        /* Top Regions List */
         .region-list { list-style: none; margin-top: 15px; }
-        .region-list li { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #334155; color: #cbd5e1; font-size: 1.1rem; }
+        .region-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #334155; color: #cbd5e1; font-size: 1.1rem; }
         .region-list li:last-child { border: none; }
         .region-count { background: #e63946; color: white; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 0.95rem; }
+
+        /* MODAL STYLES (Dark Mode) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-card { background: #1e293b; width: 90%; max-width: 400px; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); position: relative; border: 1px solid #334155; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; border: none; background: none; }
+        .close-btn:hover { color: #e63946; }
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -120,7 +72,6 @@
     </div>
 
     <div class="main-content">
-        
         <div class="header">
             <h1>Platform <strong>Intelligence & Growth</strong></h1>
             <div class="live-badge"><div class="dot"></div> System Status: Scaling</div>
@@ -128,51 +79,43 @@
 
         <div class="metrics-grid">
             <div class="metric-card">
-                <div class="metric-info">
-                    <h3>Total Registered Heroes</h3>
-                    <h2><%= totalUsers %></h2>
-                </div>
+                <div class="metric-info"><h3>Total Registered Heroes</h3><h2><%= totalUsers %></h2></div>
                 <i class="fas fa-users metric-icon"></i>
             </div>
             <div class="metric-card" style="background: linear-gradient(135deg, #1e293b, #2d1418); border-color: #e63946;">
-                <div class="metric-info">
-                    <h3 style="color: #fda4af;">Total Lives Saved</h3>
-                    <h2 style="color: #e63946;"><%= totalDonations %></h2>
-                </div>
+                <div class="metric-info"><h3 style="color: #fda4af;">Total Lives Saved</h3><h2 style="color: #e63946;"><%= totalDonations %></h2></div>
                 <i class="fas fa-heartbeat metric-icon" style="color: #e63946; opacity: 0.8;"></i>
             </div>
             <div class="metric-card">
-                <div class="metric-info">
-                    <h3>Emergency Requests</h3>
-                    <h2><%= totalRequests %></h2>
-                </div>
+                <div class="metric-info"><h3>Emergency Requests</h3><h2><%= totalRequests %></h2></div>
                 <i class="fas fa-ambulance metric-icon"></i>
             </div>
         </div>
 
         <div class="chart-card full-width">
             <h3><i class="fas fa-chart-line"></i> User Acquisition Growth (Month-over-Month)</h3>
-            <div class="chart-container" style="height: 350px;">
-                <canvas id="growthChart"></canvas>
-            </div>
+            <div class="chart-container" style="height: 300px;"><canvas id="growthChart"></canvas></div>
         </div>
 
         <div class="charts-grid">
             <div class="chart-card">
-                <h3><i class="fas fa-wave-square"></i> Emergency Request Volume (Last 7 Days)</h3>
-                <div class="chart-container">
-                    <canvas id="dailyRequestsChart"></canvas>
-                </div>
+                <h3><i class="fas fa-wave-square"></i> Emergencies (7 Days)</h3>
+                <div class="chart-container"><canvas id="dailyRequestsChart"></canvas></div>
             </div>
 
             <div class="chart-card">
-                <h3><i class="fas fa-map-marked-alt"></i> Highest Demand Regions</h3>
+                <h3><i class="fas fa-user-plus"></i> New Users (7 Days)</h3>
+                <div class="chart-container"><canvas id="dailyUsersChart"></canvas></div>
+            </div>
+
+            <div class="chart-card">
+                <h3><i class="fas fa-map-marked-alt"></i> Top Regions</h3>
                 <ul class="region-list">
                     <% if (topRegions.length > 0) { %>
                         <% topRegions.forEach((region) => { %>
                             <li>
                                 <span><i class="fas fa-map-marker-alt" style="color:#e63946; margin-right:8px;"></i> <%= region._id || "Unspecified" %></span>
-                                <span class="region-count"><%= region.count %> Donors</span>
+                                <span class="region-count"><%= region.count %></span>
                             </li>
                         <% }) %>
                     <% } else { %>
@@ -182,85 +125,99 @@
             </div>
         </div>
 
+        <div class="chart-card full-width">
+            <h3><i class="fas fa-address-book"></i> User Directory</h3>
+            <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                <% if (typeof allUsers !== 'undefined' && allUsers.length > 0) { %>
+                    <% allUsers.forEach(user => { %>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #334155;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <span style="background: #e63946; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 13px;"><%= user.bloodGroup %></span>
+                                <div>
+                                    <strong style="display: block; color: #f8fafc; font-size: 1.1rem;"><%= user.name %></strong>
+                                    <span style="font-size: 13px; color: #94a3b8;"><%= user.address %></span>
+                                </div>
+                            </div>
+                            <button style="background: #334155; border: none; padding: 8px 15px; border-radius: 6px; color: white; cursor: pointer; transition: 0.2s;" 
+                                    onmouseover="this.style.background='#e63946'" onmouseout="this.style.background='#334155'"
+                                    onclick="openModal('<%= user.name %>', '<%= user.bloodGroup %>', '<%= user.email %>', '<%= user.countryCode %><%= user.phone %>', '<%= user.age %>', '<%= user.gender %>', '<%= user.donationsCount %>')">
+                                View Details
+                            </button>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p style="color: #94a3b8;">No users found.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="userModal">
+        <div class="modal-card">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid #334155; padding-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: #e63946; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: bold;" id="modalInitial">A</div>
+                <div>
+                    <h2 id="modalName" style="margin: 0; color: #f8fafc; font-size: 20px;">Name</h2>
+                    <p id="modalEmail" style="margin: 0; color: #94a3b8; font-size: 14px;">email</p>
+                </div>
+            </div>
+
+            <div class="detail-row"><strong style="color: #94a3b8;">Blood Group:</strong> <span style="background: #e63946; color: white; padding: 3px 10px; border-radius: 12px; font-weight: bold;" id="modalBlood">O+</span></div>
+            <div class="detail-row"><strong style="color: #94a3b8;">WhatsApp:</strong> <span style="font-weight: bold; color: #f8fafc;" id="modalPhone">123</span></div>
+            <div class="detail-row"><strong style="color: #94a3b8;">Demographics:</strong> <span style="font-weight: bold; color: #f8fafc;" id="modalDemographics">25 / M</span></div>
+            <div class="detail-row" style="border: none;"><strong style="color: #94a3b8;">Total Donations:</strong> <span style="font-weight: bold; color: #22c55e;" id="modalDonations">0</span></div>
+        </div>
     </div>
 
     <script>
-        // Set Chart defaults for Dark Mode
+        // Modal Logic
+        function openModal(name, bloodGroup, email, phone, age, gender, donations) {
+            document.getElementById('modalName').innerText = name;
+            document.getElementById('modalInitial').innerText = name.charAt(0).toUpperCase();
+            document.getElementById('modalEmail').innerText = email;
+            document.getElementById('modalBlood').innerText = bloodGroup;
+            document.getElementById('modalPhone').innerText = '+' + phone;
+            document.getElementById('modalDemographics').innerText = `${age} yrs / ${gender}`;
+            document.getElementById('modalDonations').innerText = donations + ' times';
+            document.getElementById('userModal').style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('userModal').style.display = 'none'; }
+        window.onclick = function(event) { if (event.target === document.getElementById('userModal')) closeModal(); }
+
+        // Chart Logic
         Chart.defaults.color = '#94a3b8';
         Chart.defaults.font.family = "'Poppins', sans-serif";
 
-        // Pull actual database arrays passed from server.js
         const dynamicGrowthLabels = <%- last6MonthsLabels %>;
         const dynamicGrowthData = <%- cumulativeUserData %>;
-
         const dynamicDailyLabels = <%- last7DaysLabels %>;
         const dynamicDailyData = <%- last7DaysData %>;
+        const dynamicNewUsersData = <%- last7DaysUserData %>; // New data!
 
-        // ==========================================
-        // 1. ACTUAL USER GROWTH CHART 
-        // ==========================================
+        // 1. Growth Chart
         const ctxGrowth = document.getElementById('growthChart').getContext('2d');
         let gradientGrowth = ctxGrowth.createLinearGradient(0, 0, 0, 400);
-        gradientGrowth.addColorStop(0, 'rgba(230, 57, 70, 0.5)'); 
-        gradientGrowth.addColorStop(1, 'rgba(230, 57, 70, 0.0)'); 
-
+        gradientGrowth.addColorStop(0, 'rgba(230, 57, 70, 0.5)'); gradientGrowth.addColorStop(1, 'rgba(230, 57, 70, 0.0)'); 
         new Chart(ctxGrowth, {
             type: 'line',
-            data: {
-                labels: dynamicGrowthLabels,
-                datasets: [{
-                    label: 'Total Registered Users',
-                    data: dynamicGrowthData,
-                    borderColor: '#e63946',
-                    backgroundColor: gradientGrowth,
-                    borderWidth: 3,
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: '#e63946',
-                    pointRadius: 5,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } }, 
-                scales: {
-                    y: { grid: { color: '#334155', borderDash: [5, 5] }, beginAtZero: true },
-                    x: { grid: { display: false } }
-                }
-            }
+            data: { labels: dynamicGrowthLabels, datasets: [{ data: dynamicGrowthData, borderColor: '#e63946', backgroundColor: gradientGrowth, borderWidth: 3, pointBackgroundColor: '#fff', pointBorderColor: '#e63946', fill: true, tension: 0.4 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#334155', borderDash: [5, 5] }, beginAtZero: true }, x: { grid: { display: false } } } }
         });
 
-        // ==========================================
-        // 2. ACTUAL DAILY REQUESTS CHART 
-        // ==========================================
-        const ctxDaily = document.getElementById('dailyRequestsChart').getContext('2d');
-        
-        new Chart(ctxDaily, {
+        // 2. Emergency Chart
+        new Chart(document.getElementById('dailyRequestsChart').getContext('2d'), {
             type: 'bar',
-            data: {
-                labels: dynamicDailyLabels,
-                datasets: [{
-                    label: 'Emergency Blood Requests',
-                    data: dynamicDailyData, 
-                    backgroundColor: '#3b82f6', 
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { 
-                        grid: { color: '#334155' }, 
-                        beginAtZero: true,
-                        ticks: { stepSize: 1 } // Ensures we don't get decimal numbers like 0.5 requests
-                    },
-                    x: { grid: { display: false } }
-                }
-            }
+            data: { labels: dynamicDailyLabels, datasets: [{ data: dynamicDailyData, backgroundColor: '#3b82f6', borderRadius: 6 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#334155' }, beginAtZero: true, ticks: { stepSize: 1 } }, x: { grid: { display: false } } } }
+        });
+
+        // 3. NEW Daily Users Chart
+        new Chart(document.getElementById('dailyUsersChart').getContext('2d'), {
+            type: 'line', // A nice line chart to show the trend of new signups
+            data: { labels: dynamicDailyLabels, datasets: [{ data: dynamicNewUsersData, borderColor: '#22c55e', backgroundColor: 'rgba(34, 197, 94, 0.1)', borderWidth: 3, pointBackgroundColor: '#fff', pointBorderColor: '#22c55e', fill: true, tension: 0.3 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#334155' }, beginAtZero: true, ticks: { stepSize: 1 } }, x: { grid: { display: false } } } }
         });
     </script>
 </body>
